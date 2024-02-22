@@ -79,7 +79,7 @@ void helper(albero* t, albero*& result) {
         return;
     }else{
         helper(t->dxChild,result);
-        addElement(result,t->value);
+        addElement(result , t->value);
         helper(t->sxChild,result);
     }
 }
