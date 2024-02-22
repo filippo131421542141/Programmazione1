@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 int dimNumber(int n){
     if (n/10 == 0) 
@@ -51,9 +52,7 @@ int fromDecimaltoNmin10(int n, int base){
 }
 
 char * fromDecimaltoNsup10(int n, int base){
-    int temp=0;
     int potenza=1;
-
     int dimensione=0;
     int t=n;
     while (t>0)
@@ -71,17 +70,17 @@ char * fromDecimaltoNsup10(int n, int base){
     while (n!=0)
     {
         int corrente  = n % base;
-        temp+=(n%base)*potenza;
         n/=base;
-        
+       
         if (corrente >=0 && corrente <=9)
         {
-            num[dimensione-1]=-'0'+corrente;
+            num[dimensione-1]='0'+corrente;
         }else if (corrente >9 && corrente <=36)
         {
             num[dimensione-1] = 'a'+corrente-10;
         
         }
+       
         dimensione--;
         potenza *=10;
     }
@@ -104,23 +103,32 @@ char * fromDecimaltoNsup10(int n, int base){
 
 }
 
+int formNtoDecimal(char * num, int base){
+    int dim=0;
+    while (num[dim]!='\0')
+    {
+        dim++;
+    }
+    int decimal=0;
+    for (int i = 0; i < dim; i++)
+    {
+        decimal+=(num[i]-'0')*pow(base,dim-i-1);
+    }
+    return decimal;
+}
+
 int main(){
     int n;
     cout << "Inserisci il numero" << endl;
     cin >> n;
-    const int len=10;
-    char * esadecimale=fromDecimaltoNsup10(n,16,len);
-    
-    fromDecimaltoNsup10(n,16,len);
-    cout << "Il numero in base 16: " << esadecimale<< endl;
-    cout << "Il numero in base 8: "<< fromDecimaltoNmin10(n,8)<< endl ;
-    cout << "Il numero in base 2: "<< fromDecimaltoNmin10(n,2)<<endl;
+    char * t=fromDecimaltoNsup10(n,16) ;
 
-
+    cout << t << endl;
+    delete[] t;
     // char str[256];
     // cout << "Inserisci il numero esadecimale" << endl;
     // cin >> str;
 
     // cout << formBaseNto10(str,16)<< endl;
-
+    return 0;
 }

@@ -3,17 +3,6 @@
 #include <cstring>
 
 using namespace std;
-int contaParole(fstream in){
-    int conta=0;
-    char buffer[256];
-    while (in >> buffer)
-    {
-       conta++;
-    }
-    return conta;
-}
-
-
 
 int main(int nArg,char * arg[]){
      if (nArg != 3)
